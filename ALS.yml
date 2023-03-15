@@ -1,0 +1,48 @@
+issuer: ALS
+keywords:
+  - ALS Limited Company
+fields:
+  purchase_order: {
+    parser: regex,
+    regex :  '\s+([5-9][0-9][0-9][0-9][0-9])\s+',
+    type: int
+  }
+  invoice_number: 'TAX INVOICE:\s+(\d{10})'
+  invoice_total: 
+    parser: regex
+    regex: 
+      - Tax Incurred \(GST\)\s+.\s+AUD\$\s+(\d+.\d{2})
+      - Taxable value\s+.\s+AUD\$\s+(\d+.\d{2})
+    type: float
+    group: sum
+  account_number: '\s(\d{4})\s{2}'
+  amount: 'Taxable value\s+.\s+AUD\$\s+(\d+.\d{2})'
+  date: 'Issue Date\s+: (\d{1,2}-\w{3}-\d{4})'
+  gst: 'Tax Incurred \(GST\)\s+.\s+AUD\$\s+(\d+.\d{2})'
+  company:
+    parser: static
+    value:  ALS
+lines:
+    start: \*Misc\s+Workorder Admin Fee
+    end: \*\ denotes non-discountable item
+    line: (?P<Method>\w+.*)\s+(?P<Description>\w+.+)\s+(?P<Qty>\d+.\d{2})\s+(?P<Unit_Value>\d+.\d{2})\s+(?P<Value>\d+.\d{2})\s+(?P<GST>\d+.\d{2})\s+(?P<Line_Total>\d+.\d{2})\s+
+    type: 
+      Unit_Value: float
+      Qty: int
+      Value: float
+      GST: float
+      Line_Total: float
+    
+
+
+
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

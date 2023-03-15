@@ -1,0 +1,22 @@
+issuer: Eco Scientific Australia
+keywords:
+  -  Eco Scientific Australia Pty
+  - "74 617 233 495"
+fields:
+  vendor_number: 
+    parser: static
+    value: '507893'
+  
+  invoice_number: 'INV-\d{4}-\d{3}'
+  amount: 'TOTAL AUD\s+(\d+.\d{2})'
+  date: '\s+\d{2}\s+\w{3}\s+\d{4}\s+'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

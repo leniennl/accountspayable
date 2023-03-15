@@ -1,0 +1,22 @@
+issuer: C.K. Quality Solutions
+keywords:
+  -  C.K. Quality Solutions
+  - "90 149 117 546"
+fields:
+  vendor_number: 
+    parser: static
+    value :  "505948"
+    
+  invoice_number: 'INVOICE NO.\s+(\d{3,4})'
+  amount: 'Total Including GST\s+(\d+.\d{2})'
+  date: 'DATE\s+(\d{1,2}\/\d{1,2}\/\d{2})'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

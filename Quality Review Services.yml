@@ -1,0 +1,22 @@
+issuer: Quality Review Service
+keywords:
+  - "1018 5002"
+  - "48 667 526 117"
+fields:
+  vendor_number: 
+    parser: static
+    value :  "507306"
+
+  invoice_number: 'Invoice No:\s+(\d{3,4})'
+  amount: 'Total Including GST\s+\$(\d+.\d{2})'
+  date: '\s+(\d{1,2}\/\d{1,2}\/\d{4})'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

@@ -1,0 +1,22 @@
+issuer: Helen Dormehl
+keywords:
+  -  Helen Dormehl
+  - "89719264630"
+fields:
+  vendor_number: 
+    parser: static
+    value : "508306"
+
+  invoice_number: 'Tax Invoice:\s+(HD\d{3})'
+  amount: '  TOTAL\s+(\d+.\d{2})'
+  date: 'Date:\s+(\d{1,2}\/\d{2}\/\d{4})'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

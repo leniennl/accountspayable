@@ -1,0 +1,47 @@
+issuer: Egencia
+keywords:
+  - Egencia Australia Pty Limited
+  - Level 22
+fields:
+  purchase_order: {
+    parser: static,
+    value: ''
+  }
+  invoice_number: '(\d{12})'
+  invoice_total: 
+    parser: regex
+    regex: 
+      - TOTAL AMOUNT WITH GST\s+(\d+.\d{2})\s+AUD
+    type: float
+    group: sum
+  account_number: {
+    parser: static,
+    value: ''
+  }
+  amount: 'TOTAL AMOUNT WITHOUT GST\s+(\d+.\d{2})\s+AUD'
+  date: 'AU / DOCUMENT DATE :\s+(\d{1,2}\/\d{1,2}\/\d{4})'
+  gst: 'TOTAL GST AMOUNT\s+(\d+.\d{2})\s+AUD'
+  company:
+    parser: static
+    value:  Egencia
+  costcenter: '120\d{5}'
+  passenger: '([A-Z+]*\/[A-Z+]*)\s+M'
+  dep_date: 'Dep:\s+(\d{2}/\d{2}/\d{4})'
+
+lines:
+    start: Item\s+Description\s+Qty Ordered\s+Qty Delivered\s+Qty on B\/Order\s+Price ex GST\s+Total ex GST
+    end: Note invoice in Australian Dollars\s+Subtotal:\s+\$\d+.\d{2}
+    line: (?P<Item>^.*) - EA\s+(?P<Description>.+)\s+(?P<Qty_Ordered>\d{1,4})\s+(?P<Qty_Delivered>\d{1,4})\s+(?P<Qty_BackOrder>\d{1,4})\s+(?P<Price_ex_GST>\$\d+.\d{2})\s+(?P<Total_ex_GST>\$\d+.\d{2})
+
+
+
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

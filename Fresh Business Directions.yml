@@ -1,0 +1,23 @@
+issuer: Fresh Business Directions
+keywords:
+  - Fresh Business Directions Pty Ltd
+  - " 80 931 470 846"
+fields:
+  vendor_number: {
+    parser: regex,
+    regex :  'Vendor#\s+(\d{5,6})',
+    type: int
+  }
+  invoice_number: 'Invoice no:\s+(\d{4})'
+  amount: 'Balance due:\s+\$(\d+.\d{2})'
+  date: '\d{4}\s+(\d{1,2}\/\d{2}\/\d{4})'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

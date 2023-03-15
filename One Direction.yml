@@ -1,0 +1,23 @@
+issuer: One Direction ANZ
+keywords:
+  -  One Direction ANZ
+  - "22 709 321 471"
+fields:
+  vendor_number: {
+    parser: regex,
+    regex : 'Vendor#\s+(\d{5,6})',
+    type: int
+  }
+  invoice_number: 'INV\d{6}'
+  amount: 'TOTAL AUD\s+(\d+.\d{2})'
+  date: '(\d{1,2}\s+\w{3}\s+\d{4})\s+Level'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

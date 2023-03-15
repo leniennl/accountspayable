@@ -1,0 +1,22 @@
+issuer: Take Off Consulting
+keywords:
+  - TakeOff Consulting Pty Ltd
+  - "92 162 474 455"
+fields:
+  vendor_number: 
+    parser: static
+    value : "504033"
+  
+  invoice_number: 'INVOICE NO.\s+(\d{4})'
+  amount: '\s+A\$(\d+.\d{2})'
+  date: 'DATE\s+(\d{1,2}\/\d{1,2}\/\d{4})'
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

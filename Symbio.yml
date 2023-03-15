@@ -1,0 +1,40 @@
+issuer: Symbio Laboratories Pty Ltd
+keywords:
+  - SYMBIO LABORATORIES PTY LTD
+fields:
+  purchase_order: {
+    parser: regex,
+    regex :  'Your Order #:\s+(\d{5})',
+    type: int
+  }
+  invoice_number: 'Invoice #:\s+(\d{6})'
+  invoice_total:
+    parser: regex
+    regex:
+      - GST:\s+\$(\d+.\d{2})
+      - Subtotal:\s+\$(\d+.\d{2})
+    type: float
+    group: sum
+  account_number: 'Silliker Australia Pty Ltd\s+-\s+(\w{2,3})'
+  amount: 'Subtotal:\s+\$(\d+.\d{2})'
+  date: '\s{2}Date:\s+(\d{1,2}\/\d{1,2}\/\d{4})'
+  gst: 'GST:\s+\$(\d+.\d{2})'
+  company:
+    parser: static
+    value:  Symbio
+lines:
+   start: QUANTITY\s+ITEM\s+CODE\s+\DESCRIPTION\s+PRICE\s+DISC\.\s+LINE\s+TOTAL
+   end: Subtotal:\s+\$(\d+.\d{2})
+   line: (?P<Item>^.*) - EA\s+(?P<Description>.+)\s+(?P<Qty_Ordered>\d{1,4})\s+(?P<Qty_Delivered>\d{1,4})\s+(?P<Qty_BackOrder>\d{1,4})\s+(?P<Price_ex_GST>\$\d+.\d{2})\s+(?P<Total_ex_GST>\$\d+.\d{2})
+
+
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
+  replace:
+    - [',','']

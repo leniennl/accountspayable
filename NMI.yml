@@ -1,0 +1,37 @@
+issuer: NMI
+keywords:
+  - 61 2 6213 6145
+fields:
+  purchase_order: {
+    parser: regex,
+    regex :  'Purchase Order:\s+(\d{5,7})',
+    type: int
+  }
+  invoice_number: 'Tax Invoice\s+(\w{1}\d{6})'
+  invoice_total: 
+    parser: regex
+    regex: 
+      - GST @ 10%\s+\$\s+(\d+.\d{2})
+      - Total\s+\$\s+(\d+.\d{2})
+    type: float
+    group: sum
+  account_number: 'Account Code:\s+(SILL\d{2})'
+  amount: 'Total\s+\$\s+(\d+.\d{2})'
+  date: 'Date:\s+(\d{1,2}\-\w{3}\-\d{4})'
+  gst: 'GST @ 10%\s+\$\s+(\d+.\d{2})'
+  company:
+    parser: static
+    value:  NMI
+lines:
+  start: Service Provided\s+
+  end: Total\s+
+  line: (?P<Item>^.*) - EA\s+(?P<Description>.+)\s+(?P<Qty_Ordered>\d{1,4})\s+(?P<Qty_Delivered>\d{1,4})\s+(?P<Qty_BackOrder>\d{1,4})\s+(?P<Price_ex_GST>\$\d+.\d{2})\s+(?P<Total_ex_GST>\$\d+.\d{2}) 
+
+
+options:
+  currency: AUD
+  remove_whitespace: false
+  date_formats:
+    - "%d/%m/%Y"
+  language:
+    - en
