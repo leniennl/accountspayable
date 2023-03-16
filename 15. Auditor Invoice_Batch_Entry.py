@@ -92,7 +92,7 @@ def main():
     fw = pyautogui.getWindowsWithTitle("cmd.exe")
     if fw[0].topleft != (2318, 281):
         fw[0].topleft = (2318, 281)
-    fw[0].activate
+    fw[0].activate()
     # prompt for invoice number
     invoicenumber = input("Please enter invoice number:\n")
     invoicenumber = invoicenumber.strip()
@@ -130,45 +130,45 @@ def main():
     """company"""
     ctypes.windll.user32.SetCursorPos(610, 260)
     pyautogui.click()
-    pyautogui.write(" 112", interval=0.3)
+    pyautogui.write(" 112", interval=0.5)
     ctypes.windll.user32.SetCursorPos(1000, 300)
     pyautogui.click()
 
     """vendor number"""
     ctypes.windll.user32.SetCursorPos(800, 300)
     pyautogui.click()
-    pyautogui.write(" " + vendornumber, interval=0.3)
+    pyautogui.write(" " + vendornumber, interval=0.5)
     ctypes.windll.user32.SetCursorPos(1000, 300)
     pyautogui.click()
 
     """invoice number"""
     ctypes.windll.user32.SetCursorPos(610, 340)
     pyautogui.click()
-    pyautogui.write(invoicenumber, interval=0.4)
+    pyautogui.write(invoicenumber, interval=0.5)
     ctypes.windll.user32.SetCursorPos(1000, 300)
     pyautogui.click()
 
     """invoice date"""
     ctypes.windll.user32.SetCursorPos(610, 370)
     pyautogui.click()
-    pyautogui.write(invoicedate, interval=0.3)
+    pyautogui.write(invoicedate, interval=0.5)
     pyautogui.press("tab")
 
     """GL date"""
     ctypes.windll.user32.SetCursorPos(1050, 370)
     pyautogui.click()
-    pyautogui.write(gldate, interval=0.4)
+    pyautogui.write(gldate, interval=0.5)
     pyautogui.press("tab")
 
     """gross"""
     ctypes.windll.user32.SetCursorPos(510, 530)
     pyautogui.click()
-    pyautogui.write(" " + gross, interval=0.3)
+    pyautogui.write(" " + gross, interval=0.5)
 
     """remark"""
     ctypes.windll.user32.SetCursorPos(850, 530)
     pyautogui.click()
-    pyautogui.write(" " + remark, interval=0.3)
+    pyautogui.write(" " + remark, interval=0.5)
 
     listener = keyboard.Listener(on_press=on_press)
     listener.start()  # start to listen on a separate thread
@@ -184,7 +184,7 @@ def main():
     time.sleep(1)
 
     # reactivate terminal window for next input
-    fw[0].activate
+    fw[0].activate()
     """
     ctypes.windll.user32.SetCursorPos(2318, 131)
     pyautogui.click()
