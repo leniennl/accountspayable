@@ -3,15 +3,11 @@ import base64
 import os
 import email
 
-# email_user = 'matthew.lee@mxns.com'
-# email_pass = 'pdjxavreefdvtcta'
 
-# email_user = 'accountspayable.au@mxns.com'
-# email_pass='Silliker20'
 
-email_user = "leniennl@gmail.com"
-# email_pass='Bestpart11'
-email_pass = "wbntwbzvffbhpyyb"
+email_user = "*@gmail.com"
+
+email_pass = "xyz"
 
 # Connect to the email server:
 mail = imaplib.IMAP4_SSL("imap.gmail.com", 993)
